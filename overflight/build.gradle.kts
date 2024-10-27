@@ -12,11 +12,14 @@ android {
 
     defaultConfig {
         applicationId = "tv.projectivy.plugin.wallpaperprovider.overflight"
-        minSdk = 23
+        minSdk = 24
         targetSdk = 35
         versionCode = 1
         versionName = "1.01"
 
+        base {
+            archivesName = "ProjectivyPlugin-Overflight-$versionName-c$versionCode"
+        }
     }
 
     compileOptions {
