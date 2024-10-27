@@ -1,4 +1,4 @@
-package tv.projectivy.plugin.wallpaperprovider.sample
+package tv.projectivy.plugin.wallpaperprovider.overflight
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -9,9 +9,8 @@ import com.google.gson.ToNumberPolicy
 import com.google.gson.reflect.TypeToken
 
 object PreferencesManager {
-    private const val IMAGE_URL_KEY = "image_url_key"
-
     lateinit var preferences: SharedPreferences
+    const val DEFAULT_VIDEO_SOURCE_URL = "https://spocky.github.io/projectivy-plugin-wallpaper-overflight/videos.json"
 
     fun init(context: Context) {
         preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -46,9 +45,17 @@ object PreferencesManager {
             else -> throw UnsupportedOperationException("Not yet implemented")
         }
 
-    var imageUrl: String
-        get() = PreferencesManager[IMAGE_URL_KEY, "https://images.pexels.com/photos/462162/pexels-photo-462162.jpeg"]
-        set(value) { PreferencesManager[IMAGE_URL_KEY]=value }
+    var video_4k: Boolean
+        get() = PreferencesManager["video-4k", false]
+        set(value) { PreferencesManager["video-4k"]=value }
+
+    var video_hdr: Boolean
+        get() = PreferencesManager["video-hdr", false]
+        set(value) { PreferencesManager["video-hdr"]=value }
+
+    var videoSourceUrl: String
+        get() = PreferencesManager["video-source-url", DEFAULT_VIDEO_SOURCE_URL]
+        set(value) { PreferencesManager["video-source-url"]=value }
 
     fun export(): String {
         return Gson().toJson(preferences.all)

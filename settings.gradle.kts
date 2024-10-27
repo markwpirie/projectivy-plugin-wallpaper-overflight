@@ -14,5 +14,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Projectivy Wallpaper Provider"
-include(":sample")
+include(":overflight")
 include(":api")
