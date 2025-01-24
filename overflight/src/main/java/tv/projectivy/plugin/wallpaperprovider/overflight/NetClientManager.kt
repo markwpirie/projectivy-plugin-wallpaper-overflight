@@ -2,6 +2,7 @@ package tv.projectivy.plugin.wallpaperprovider.overflight
 
 import android.content.Context
 import android.net.TrafficStats
+import android.util.Log
 import okhttp3.Cache
 import okhttp3.CacheControl
 import okhttp3.Interceptor
@@ -48,6 +49,7 @@ object NetClientManager {
                 if (response.code == 200 && response.body != null) {
                     return response.body?.string()
                 }
+                Log.d("NetClientManager", "Request unsuccessful. Response code:" + response.code)
             }
         } catch (e: Exception) {
             e.printStackTrace()
