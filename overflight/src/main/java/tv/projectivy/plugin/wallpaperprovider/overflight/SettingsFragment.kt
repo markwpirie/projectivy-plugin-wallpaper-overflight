@@ -35,10 +35,18 @@ class SettingsFragment : GuidedStepSupportFragment() {
             .build()
             .also { actions.add(it) }
 
-        val currentVideoSourceUrl = PreferencesManager.videoSourceUrl
         GuidedAction.Builder(context)
-            .id(ACTION_ID_VIDEO_SOURCE_URL)
-            .title(R.string.setting_video_source)
+            .id(ACTION_ID_FALLBACK)
+            .title(R.string.setting_fallback)
+            .checkSetId(GuidedAction.CHECKBOX_CHECK_SET_ID)
+            .checked(PreferencesManager.fallback)
+            .build()
+            .also { actions.add(it) }
+
+        val currentVideoSourceUrl = PreferencesManager.mediaSourceUrl
+        GuidedAction.Builder(context)
+            .id(ACTION_ID_MEDIA_SOURCE_URL)
+            .title(R.string.setting_media_source)
             .description(currentVideoSourceUrl)
             .editDescription(currentVideoSourceUrl)
             .descriptionEditable(true)
@@ -50,11 +58,11 @@ class SettingsFragment : GuidedStepSupportFragment() {
         when (action.id) {
             ACTION_ID_VIDEO_4K -> PreferencesManager.video_4k = action.isChecked
             ACTION_ID_VIDEO_HDR -> PreferencesManager.video_hdr = action.isChecked
-            ACTION_ID_VIDEO_SOURCE_URL -> {
+            ACTION_ID_MEDIA_SOURCE_URL -> {
                 val params: CharSequence? = action.editDescription
-                findActionById(ACTION_ID_VIDEO_SOURCE_URL)?.description = params
-                notifyActionChanged(findActionPositionById(ACTION_ID_VIDEO_SOURCE_URL))
-                PreferencesManager.videoSourceUrl = (params?: PreferencesManager.DEFAULT_VIDEO_SOURCE_URL).toString()
+                findActionById(ACTION_ID_MEDIA_SOURCE_URL)?.description = params
+                notifyActionChanged(findActionPositionById(ACTION_ID_MEDIA_SOURCE_URL))
+                PreferencesManager.mediaSourceUrl = (params?: PreferencesManager.DEFAULT_MEDIA_SOURCE_URL).toString()
             }
         }
     }
@@ -62,6 +70,7 @@ class SettingsFragment : GuidedStepSupportFragment() {
     companion object {
         private const val ACTION_ID_VIDEO_4K = 1L
         private const val ACTION_ID_VIDEO_HDR= 2L
-        private const val ACTION_ID_VIDEO_SOURCE_URL= 3L
+        private const val ACTION_ID_FALLBACK= 3L
+        private const val ACTION_ID_MEDIA_SOURCE_URL= 4L
     }
 }

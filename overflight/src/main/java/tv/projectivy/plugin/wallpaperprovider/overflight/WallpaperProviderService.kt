@@ -13,13 +13,12 @@ import tv.projectivy.plugin.wallpaperprovider.api.Event
 import tv.projectivy.plugin.wallpaperprovider.api.IWallpaperProviderService
 import tv.projectivy.plugin.wallpaperprovider.api.Wallpaper
 import tv.projectivy.plugin.wallpaperprovider.api.WallpaperDisplayMode
-import tv.projectivy.plugin.wallpaperprovider.api.WallpaperType
 import java.lang.reflect.Type
 
 class WallpaperProviderService: Service() {
 
     val gson by lazy { Gson() }
-    val videoListType: Type = object : TypeToken<List<Video>>() {}.type
+    val mediaListType: Type = object : TypeToken<List<Media?>>() {}.type
 
     override fun onCreate() {
         super.onCreate()
@@ -52,7 +51,7 @@ class WallpaperProviderService: Service() {
     }
 
     suspend fun fetchWallpapers(): List<Wallpaper> {
-        val jsonString = loadJson(PreferencesManager.videoSourceUrl)
+        val jsonString = loadJson(PreferencesManager.mediaSourceUrl)
         return parseJson(jsonString)
     }
 
@@ -65,14 +64,20 @@ class WallpaperProviderService: Service() {
     suspend fun parseJson(jsonString: String?): List<Wallpaper> {
         return withContext(Dispatchers.Default) {
             try {
-                // Parse the JSON into a list of Video objects
-                gson.fromJson<List<Video>?>(jsonString, videoListType)
-                // Convert the list of Video objects into a list of Wallpaper objects
-                ?.map { Wallpaper(it.preferredVideoUri, WallpaperType.VIDEO,
-                    WallpaperDisplayMode.DEFAULT, it.title, it.location) }
-                // Filter out any wallpapers with an empty URI
-                ?.filter { it.uri.isNotBlank() }
-                ?: emptyList()
+                // Parse the JSON into a list of Media objects
+                gson.fromJson<List<Media?>?>(jsonString, mediaListType)
+                    ?.let { mediaList ->
+                        // Filter out any null objects (ex: due to trailing commas in JSON)
+                        mediaList.filterNotNull()
+                        // Convert the list of Media objects into a list of Wallpaper objects
+                        .map { media ->
+                            Wallpaper(media.preferredMediaUri, media.mediaType,
+                                WallpaperDisplayMode.DEFAULT, media.title, media.location)
+                        }
+                        // Filter out any wallpapers with an empty URI
+                        .filter { it.uri.isNotBlank() }
+                    }
+                    ?: emptyList()
             } catch (e: Exception) {
                 Log.e("JSON Parsing", "Error parsing JSON: $e")
                 emptyList()

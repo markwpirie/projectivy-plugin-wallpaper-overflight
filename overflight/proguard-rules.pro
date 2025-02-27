@@ -20,5 +20,5 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 -keepclassmembers class tv.projectivy.plugin.wallpaperprovider.api.Wallpaper { !static !transient <fields>; }
--keep class tv.projectivy.plugin.wallpaperprovider.overflight.Video
--keepclassmembers class tv.projectivy.plugin.wallpaperprovider.overflight.Video { !static !transient <fields>; }
+-keep class tv.projectivy.plugin.wallpaperprovider.overflight.Media
+-keepclassmembers class tv.projectivy.plugin.wallpaperprovider.overflight.Media { !static !transient <fields>; }

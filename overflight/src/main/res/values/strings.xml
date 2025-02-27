@@ -11,5 +11,6 @@
     <string name="settings">Wallpaper settings</string>
     <string name="setting_video_4k">4K</string>
     <string name="setting_video_hdr">HDR</string>
-    <string name="setting_video_source">Videos source</string>
+    <string name="setting_fallback">Fallback to lower quality if not available</string>
+    <string name="setting_media_source">Media source</string>
 </resources>
