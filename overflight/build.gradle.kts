@@ -14,8 +14,8 @@ android {
         applicationId = "tv.projectivy.plugin.wallpaperprovider.overflight"
         minSdk = 24
         targetSdk = 35
-        versionCode = 2
-        versionName = "1.02"
+        versionCode = 3
+        versionName = "1.10"
 
         base {
             archivesName = "ProjectivyPlugin-Overflight-$versionName-c$versionCode"
