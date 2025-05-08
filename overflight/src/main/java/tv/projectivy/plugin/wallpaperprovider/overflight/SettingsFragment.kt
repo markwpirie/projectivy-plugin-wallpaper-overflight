@@ -52,6 +52,15 @@ class SettingsFragment : GuidedStepSupportFragment() {
             .descriptionEditable(true)
             .build()
             .also { actions.add(it) }
+
+        GuidedAction.Builder(context)
+            .id(ACTION_ID_CACHE_DURATION)
+            .title(R.string.setting_cache_duration)
+            .description(PreferencesManager.cacheDurationHours.toString())
+            .editDescription(PreferencesManager.cacheDurationHours.toString())
+            .descriptionEditable(true)
+            .build()
+            .also { actions.add(it) }
     }
 
     override fun onGuidedActionClicked(action: GuidedAction) {
@@ -60,9 +69,15 @@ class SettingsFragment : GuidedStepSupportFragment() {
             ACTION_ID_VIDEO_HDR -> PreferencesManager.video_hdr = action.isChecked
             ACTION_ID_MEDIA_SOURCE_URL -> {
                 val params: CharSequence? = action.editDescription
-                findActionById(ACTION_ID_MEDIA_SOURCE_URL)?.description = params
-                notifyActionChanged(findActionPositionById(ACTION_ID_MEDIA_SOURCE_URL))
                 PreferencesManager.mediaSourceUrl = (params?: PreferencesManager.DEFAULT_MEDIA_SOURCE_URL).toString()
+                findActionById(ACTION_ID_MEDIA_SOURCE_URL)?.description = PreferencesManager.mediaSourceUrl
+                notifyActionChanged(findActionPositionById(ACTION_ID_MEDIA_SOURCE_URL))
+            }
+            ACTION_ID_CACHE_DURATION -> {
+                val params: CharSequence? = action.editDescription
+                PreferencesManager.cacheDurationHours = (params?.toString()?.toIntOrNull() ?: PreferencesManager.DEFAULT_CACHE_DURATION_HOURS).coerceAtLeast(0)
+                findActionById(ACTION_ID_CACHE_DURATION)?.description = PreferencesManager.cacheDurationHours.toString()
+                notifyActionChanged(findActionPositionById(ACTION_ID_CACHE_DURATION))
             }
         }
     }
@@ -72,5 +87,6 @@ class SettingsFragment : GuidedStepSupportFragment() {
         private const val ACTION_ID_VIDEO_HDR= 2L
         private const val ACTION_ID_FALLBACK= 3L
         private const val ACTION_ID_MEDIA_SOURCE_URL= 4L
+        private const val ACTION_ID_CACHE_DURATION = 5L
     }
 }

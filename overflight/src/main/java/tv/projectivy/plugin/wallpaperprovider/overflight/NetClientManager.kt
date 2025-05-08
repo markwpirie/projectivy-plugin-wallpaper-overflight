@@ -16,13 +16,11 @@ object NetClientManager {
 
     private const val CALL_TIMEOUT_IN_S = 5L
     private const val CACHE_SIZE = 10 * 1024 * 1024L
-    private const val MAX_AGE_IN_DAYS = 3
 
-    private val cacheControl: CacheControl by lazy {
-        CacheControl.Builder()
-            .maxAge(MAX_AGE_IN_DAYS, TimeUnit.DAYS)
+    private val cacheControl: CacheControl
+        get() = CacheControl.Builder()
+            .maxAge(PreferencesManager.cacheDurationHours, TimeUnit.HOURS)
             .build()
-    }
 
     lateinit var httpClient: OkHttpClient
 

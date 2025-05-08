@@ -11,6 +11,7 @@ import com.google.gson.reflect.TypeToken
 object PreferencesManager {
     lateinit var preferences: SharedPreferences
     const val DEFAULT_MEDIA_SOURCE_URL = "https://raw.githubusercontent.com/spocky/projectivy-plugin-wallpaper-overflight/refs/heads/main/videos.json"
+    const val DEFAULT_CACHE_DURATION_HOURS = 24
 
     fun init(context: Context) {
         preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -39,7 +40,7 @@ object PreferencesManager {
         when (T::class) {
             String::class -> preferences.getString(key, defaultValue as String? ?: "") as T
             Int::class -> preferences.getInt(key, defaultValue as? Int ?: -1) as T
-            Boolean::class -> preferences.getBoolean(key, defaultValue as? Boolean ?: false) as T
+            Boolean::class -> preferences.getBoolean(key, defaultValue as? Boolean == true) as T
             Float::class -> preferences.getFloat(key, defaultValue as? Float ?: -1f) as T
             Long::class -> preferences.getLong(key, defaultValue as? Long ?: -1) as T
             else -> throw UnsupportedOperationException("Not yet implemented")
@@ -60,6 +61,10 @@ object PreferencesManager {
     var mediaSourceUrl: String
         get() = PreferencesManager["video-source-url", DEFAULT_MEDIA_SOURCE_URL].takeIf { it.isNotEmpty() } ?: DEFAULT_MEDIA_SOURCE_URL
         set(value) { PreferencesManager["video-source-url"]=value }
+
+    var cacheDurationHours: Int
+        get() = PreferencesManager["cache-duration-hours", DEFAULT_CACHE_DURATION_HOURS].takeIf { it>= 0 } ?: DEFAULT_CACHE_DURATION_HOURS
+        set(value) { PreferencesManager["cache-duration-hours"]=value }
 
     fun export(): String {
         return Gson().toJson(preferences.all)
