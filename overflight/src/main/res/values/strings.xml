@@ -1,7 +1,7 @@
 <resources>
     <string name="plugin_name">Projectivy Wallpaper : Overflight</string>
     <string name="plugin_short_name">Overflight</string>
-    <string name="plugin_description">Displays videos from Apple TV\'s Aerial screensaver</string>
+    <string name="plugin_description">Displays videos from Apple TV\'s Aerial screensaver or any other image/video referenced in the media source</string>
 
     <!--Plugin UUID *** YOU NEED TO CHANGE IT *** -->
     <!--https://www.uuidgenerator.net/version4 -->
@@ -13,4 +13,5 @@
     <string name="setting_video_hdr">HDR</string>
     <string name="setting_fallback">Fallback to lower quality if not available</string>
     <string name="setting_media_source">Media source</string>
+    <string name="setting_cache_duration">Media source cache duration (in hours)</string>
 </resources>
