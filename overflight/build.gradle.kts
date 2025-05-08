@@ -8,14 +8,14 @@ plugins {
 
 android {
     namespace = "tv.projectivy.plugin.wallpaperprovider.overflight"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "tv.projectivy.plugin.wallpaperprovider.overflight"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 3
-        versionName = "1.10"
+        versionName = "1.11"
 
         base {
             archivesName = "ProjectivyPlugin-Overflight-$versionName-c$versionCode"
@@ -78,8 +78,8 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.15.0")
-    implementation("androidx.leanback:leanback:1.2.0-alpha04")
+    implementation("androidx.core:core-ktx:1.16.0")
+    implementation("androidx.leanback:leanback:1.2.0")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.preference:preference-ktx:1.2.1")
@@ -89,8 +89,8 @@ dependencies {
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
     implementation("com.squareup.okhttp3:okhttp")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
 
     implementation(project(":api"))
 }
