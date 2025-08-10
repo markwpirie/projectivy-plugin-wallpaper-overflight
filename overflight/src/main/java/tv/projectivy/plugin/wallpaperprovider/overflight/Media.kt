@@ -12,7 +12,8 @@ data class Media(val location: String="",
                  val url_1080p: String="",
                  val url_1080p_hdr: String="",
                  val url_4k: String="",
-                 val url_4k_hdr: String="") {
+                 val url_4k_hdr: String="",
+                 val author: String="") {
 
     val mediaType: Int
         get() = when {

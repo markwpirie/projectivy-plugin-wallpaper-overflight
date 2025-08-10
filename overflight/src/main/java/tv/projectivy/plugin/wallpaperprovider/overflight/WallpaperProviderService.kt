@@ -72,7 +72,7 @@ class WallpaperProviderService: Service() {
                         // Convert the list of Media objects into a list of Wallpaper objects
                         .map { media ->
                             Wallpaper(media.preferredMediaUri, media.mediaType,
-                                WallpaperDisplayMode.DEFAULT, media.title, media.location)
+                               WallpaperDisplayMode.DEFAULT, media.title, media.location, media.author)
                         }
                         // Filter out any wallpapers with an empty URI
                         .filter { it.uri.isNotBlank() }
