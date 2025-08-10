@@ -17,6 +17,8 @@ object NetClientManager {
     private const val CALL_TIMEOUT_IN_S = 5L
     private const val CACHE_SIZE = 10 * 1024 * 1024L
 
+    private val NO_OVERRIDE_CACHE_CONTROL_HEADERS = listOf("no-store", "no-cache", "must-revalidate", "max-age=")
+
     private val cacheControl: CacheControl
         get() = CacheControl.Builder()
             .maxAge(PreferencesManager.cacheDurationHours, TimeUnit.HOURS)
@@ -61,9 +63,19 @@ object NetClientManager {
             val request: Request = chain.request()
             val response: Response = chain.proceed(request)
 
+            // Don't add custom Cache-Control header when not needed
+            val existingCacheControl = response.header("Cache-Control")
+            existingCacheControl
+                ?.takeIf { header ->
+                    NO_OVERRIDE_CACHE_CONTROL_HEADERS
+                        .any { header.contains(it) }
+                }
+                ?.let { return response }
+
             return response.newBuilder()
-                .header("Cache-Control", cacheControl.toString())
-                .build()
+                    .removeHeader("Cache-Control")
+                    .addHeader("Cache-Control", cacheControl.toString())
+                    .build()
         }
     }
 
