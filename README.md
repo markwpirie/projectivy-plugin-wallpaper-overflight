@@ -27,6 +27,7 @@ This is not a screensaver but a wallpaper dedicated to Projectivy Launcher. For 
     },
 ]
 ```
+None of the fields are mandatory but you will need to set at least one url_* so that a wallpaper is loaded.
 
 # Note
 This plugin is provided as is, and is not affiliated with Aerials or Apple Inc.
