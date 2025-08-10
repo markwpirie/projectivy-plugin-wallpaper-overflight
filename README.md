@@ -12,6 +12,22 @@ Feel free to share your custom lists !
 # Screensaver
 This is not a screensaver but a wallpaper dedicated to Projectivy Launcher. For a total "Aerials" experience, don't forget to install [this full-featured "Aerials" screensaver](https://github.com/theothernt/AerialViews)
 
+# JSON format
+```
+[
+    {
+        "location": "Media source",
+        "title": "Media title",
+        "author": "Media author",
+        "url_img": "http://url-to-image.jpg",
+        "url_1080p": "http://url-to-1080p-video.mp4",
+        "url_1080p_hdr": "http://url-to-1080p-hdr-video.mp4",
+        "url_4k": "http://url-to-4k-video.mp4",
+        "url_4k_hdr": "http://url-to-4k-hdr-video.mp4"
+    },
+]
+```
+
 # Note
 This plugin is provided as is, and is not affiliated with Aerials or Apple Inc.
 If you're a developer and want to create your own wallpaper plugin, check [the sample project](https://github.com/spocky/projectivy-plugin-wallpaper-provider) or use this repository as a base.
