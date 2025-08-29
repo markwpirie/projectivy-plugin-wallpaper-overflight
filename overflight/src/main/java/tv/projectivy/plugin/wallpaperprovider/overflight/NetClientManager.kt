@@ -46,7 +46,7 @@ object NetClientManager {
     fun newCall(request: Request): String? {
         try {
             httpClient.newCall(request).execute().use { response ->
-                if (response.code == 200 && response.body != null) {
+                if (response.isSuccessful) {
                     return response.body?.string()
                 }
                 Log.d("NetClientManager", "Request unsuccessful. Response code:" + response.code)
