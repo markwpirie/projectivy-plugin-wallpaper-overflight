@@ -14,7 +14,7 @@ android {
         applicationId = "tv.projectivy.plugin.wallpaperprovider.overflight"
         minSdk = 24
         targetSdk = 36
-        versionCode = 4
+        versionCode = 5
         versionName = "1.12"
 
         base.archivesName =  "ProjectivyPlugin-Overflight-$versionName-c$versionCode"
@@ -80,7 +80,7 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.16.0")
+    implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.leanback:leanback:1.2.0")
     implementation("androidx.appcompat:appcompat:1.7.1")
     implementation("com.google.android.material:material:1.12.0")
@@ -88,7 +88,7 @@ dependencies {
 
     implementation("com.google.code.gson:gson:2.13.1")
 
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:5.1.0"))
     implementation("com.squareup.okhttp3:okhttp")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
